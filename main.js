@@ -15,12 +15,11 @@ function changeLanguage(langCode) {
         googleCombo.value = langCode;
         googleCombo.dispatchEvent(new Event('change'));
     } else {
-        // If combo not ready, retry after a short delay
         setTimeout(() => changeLanguage(langCode), 500);
     }
 }
 
-// 2. Real-time RSS News Fetching
+// 2. Real-time RSS News Fetching (12 articles)
 const NEWS_FEEDS = [
     'https://grist.org/feed/',
     'https://e360.yale.edu/feed'
@@ -36,13 +35,14 @@ async function fetchNews() {
             const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed)}`);
             const data = await response.json();
             if (data.status === 'ok') {
-                allArticles.push(...data.items.slice(0, 3));
+                allArticles.push(...data.items.slice(0, 6)); // Each feed gives 6
             }
         }
 
         allArticles.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+        const finalArticles = allArticles.slice(0, 12); // Limit to 12
         
-        newsGrid.innerHTML = allArticles.map(item => `
+        newsGrid.innerHTML = finalArticles.map(item => `
             <article class="article-card">
                 <div class="article-img">
                     <img src="${item.thumbnail || 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80'}" alt="${item.title}">
@@ -55,7 +55,7 @@ async function fetchNews() {
         `).join('');
 
     } catch (error) {
-        newsGrid.innerHTML = '<p>뉴스를 불러오는 중입니다. 잠시만 기다려주세요.</p>';
+        newsGrid.innerHTML = '<p>뉴스를 불러오는 중 오류가 발생했습니다.</p>';
     }
 }
 
@@ -83,8 +83,4 @@ window.addEventListener('scroll', () => {
 // 4. Initial Load
 document.addEventListener('DOMContentLoaded', () => {
     fetchNews();
-    
-    // Auto-init theme
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
 });
