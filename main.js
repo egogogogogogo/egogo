@@ -1,57 +1,54 @@
-// Mock Data for News Feed
+// Mock Data for News Feed (Reflecting 2026 Environmental Context)
 const articles = [
     {
         id: 1,
         tag: 'Climate',
-        title: '북극곰의 마지막 피난처, 그린란드 빙하가 녹고 있다',
-        img: 'https://images.unsplash.com/photo-1589656966895-2f33e7653819?auto=format&fit=crop&w=600&q=80',
-        date: '2024.03.15'
+        title: 'Yale e360: 북극해 해빙 속도, 2026년 기점 임계점 돌파 경고',
+        img: 'https://images.unsplash.com/photo-1473081556163-2a17de81fc97?auto=format&fit=crop&w=600&q=80',
+        date: '2026.03.01'
     },
     {
         id: 2,
         tag: 'Zero Waste',
-        title: '일주일간 플라스틱 없이 살기: 에디터 체험기',
+        title: 'Grist: 샌프란시스코, 세계 최초 도시 전역 ‘제로 플라스틱’ 조례 시행',
         img: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=600&q=80',
-        date: '2024.03.12'
+        date: '2026.02.28'
     },
     {
         id: 3,
-        tag: 'Tech',
-        title: '탄소 포집 기술(CCS)은 기후 위기의 구원투수가 될까?',
+        tag: 'Policy',
+        title: 'EU 탄소배출권 가격 t당 150유로 돌파... 국내 수출 기업 비상',
         img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80',
-        date: '2024.03.10'
+        date: '2026.02.25'
     },
     {
         id: 4,
-        tag: 'Policy',
-        title: 'EU의 탄소국경조정제도(CBAM), 한국 기업의 대응 전략',
-        img: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80',
-        date: '2024.03.08'
+        tag: 'Tech',
+        title: '테슬라, 차세대 LFP 배터리 팩에 재활용 구리 90% 적용 발표',
+        img: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=600&q=80',
+        date: '2026.02.20'
     },
     {
         id: 5,
-        tag: 'Trend',
-        title: '비건 레더의 진화: 선인장에서 버섯 가죽까지',
-        img: 'https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&w=600&q=80',
-        date: '2024.03.05'
+        tag: 'Nature',
+        title: '브라질 아마존 열대우림 복원 면적, 축구장 100만 개 돌파',
+        img: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=600&q=80',
+        date: '2026.02.15'
     },
     {
         id: 6,
-        tag: 'Ocean',
-        title: '미세 플라스틱, 우리의 식탁을 위협하다',
-        img: 'https://images.unsplash.com/photo-1483683804023-6ccdb62f86ef?auto=format&fit=crop&w=600&q=80',
-        date: '2024.03.01'
+        tag: 'Trend',
+        title: '2026 리사이클 패션 위크: "버려진 그물도 오뜨쿠튀르가 된다"',
+        img: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=600&q=80',
+        date: '2026.02.10'
     }
 ];
 
 // Navigation Logic
-const navLinks = document.querySelectorAll('.main-nav a, .logo a, .footer-col a');
+const navLinks = document.querySelectorAll('.main-nav a, .logo a');
 const pages = document.querySelectorAll('.page-section');
-const menuBtn = document.querySelector('.mobile-menu-btn');
-const mobileNav = document.querySelector('.main-nav');
 
 function navigateTo(targetId) {
-    // Hide all pages
     pages.forEach(page => {
         page.classList.remove('active');
         if (page.id === targetId) {
@@ -59,7 +56,6 @@ function navigateTo(targetId) {
         }
     });
 
-    // Update active nav link
     document.querySelectorAll('.main-nav a').forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('onclick')?.includes(targetId)) {
@@ -67,22 +63,14 @@ function navigateTo(targetId) {
         }
     });
 
-    // Close mobile menu if open
-    mobileNav.classList.remove('open');
-
-    // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-// Mobile Menu Toggle
-menuBtn.addEventListener('click', () => {
-    mobileNav.classList.toggle('open');
-});
 
 // Render News Feed
 const newsGrid = document.getElementById('news-grid');
 
 function renderArticles() {
+    if (!newsGrid) return;
     newsGrid.innerHTML = articles.map(article => `
         <article class="article-card">
             <div class="article-img">
@@ -96,33 +84,15 @@ function renderArticles() {
     `).join('');
 }
 
+/**
+ * [자동 업데이트 가이드]
+ * 매일 새로운 뉴스를 업데이트하려면 아래 방법을 추천합니다:
+ * 1. RSS Parser: Grist(https://grist.org/feed/) 등의 RSS 피드를 JavaScript로 파싱합니다.
+ * 2. Fetch API: 서버 측(Node.js 등)에서 주기적으로 피드를 읽어 articles.json 파일을 갱신합니다.
+ * 3. GitHub Actions: 하루에 한 번 스크립트를 실행하여 GitHub 저장소 데이터를 업데이트하고 배포합니다.
+ */
+
 // Initial Load
 document.addEventListener('DOMContentLoaded', () => {
     renderArticles();
-});
-
-// Load More Button (Mock)
-const loadMoreBtn = document.querySelector('.load-more button');
-loadMoreBtn.addEventListener('click', () => {
-    loadMoreBtn.textContent = 'Loading...';
-    setTimeout(() => {
-        // Duplicate articles for demo
-        articles.forEach(article => {
-            const clone = {...article, id: article.id + 10};
-            const div = document.createElement('div'); // Temporary container
-            div.innerHTML = `
-                <article class="article-card">
-                    <div class="article-img">
-                        <img src="${clone.img}" alt="${clone.title}">
-                    </div>
-                    <div class="article-content">
-                        <span class="article-meta">${clone.tag} • ${clone.date}</span>
-                        <h3>${clone.title}</h3>
-                    </div>
-                </article>
-            `;
-            newsGrid.appendChild(div.firstElementChild);
-        });
-        loadMoreBtn.textContent = 'Load More News';
-    }, 1000);
 });
