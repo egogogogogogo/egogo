@@ -70,6 +70,39 @@ function renderNumberSets() {
 generateBtn.addEventListener('click', renderNumberSets);
 renderNumberSets();
 
+// Diet Failure Cost Calculator Logic
+const calcDietBtn = document.getElementById('calc-diet-btn');
+const dietResult = document.getElementById('diet-result');
+const totalCostValue = document.getElementById('total-cost-value');
+const emotionalMsg = document.getElementById('emotional-msg');
+
+calcDietBtn.addEventListener('click', () => {
+    const pt = parseInt(document.getElementById('pt-cost').value) || 0;
+    const gym = parseInt(document.getElementById('gym-cost').value) || 0;
+    const supple = parseInt(document.getElementById('supple-cost').value) || 0;
+    const food = parseInt(document.getElementById('food-cost').value) || 0;
+    const yoyo = parseInt(document.getElementById('yoyo-cost').value) || 0;
+
+    const total = pt + gym + supple + food + yoyo;
+    
+    totalCostValue.textContent = total.toLocaleString();
+    dietResult.style.display = 'block';
+
+    let message = "";
+    if (total === 0) {
+        message = "지출 내역을 입력해주세요. 여러분의 소중한 돈이 어디로 가고 있는지 확인이 필요합니다.";
+    } else if (total < 100) {
+        message = "이제 막 시작하셨군요! 더 큰 비용이 낭비되기 전에 제대로 된 방법을 찾아야 합니다.";
+    } else if (total < 500) {
+        message = "중고차 한 대 가격이 다이어트로 사라졌습니다. 요요의 굴레를 끊지 않으면 이 수치는 계속 늘어날 것입니다.";
+    } else {
+        message = "지금까지 수천만원을 투자했지만 남은 것은 무엇인가요? 이제는 '진짜' 전문가의 도움이 절실한 시점입니다.";
+    }
+    emotionalMsg.textContent = message;
+
+    dietResult.scrollIntoView({ behavior: 'smooth' });
+});
+
 // Animal Face Test Logic
 const URL = "https://teachablemachine.withgoogle.com/models/-DW_XAraC/";
 let model, maxPredictions;

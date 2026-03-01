@@ -94,6 +94,64 @@
 
         <hr class="divider">
 
+        <!-- Diet Failure Cost Calculator Section -->
+        <section id="diet-calculator" class="content-section">
+            <div class="section-header">
+                <h1>다이어트 실패 비용 계산기 <span class="badge">강력 추천 🔥</span></h1>
+                <p class="subtitle">그동안 다이어트에 얼마를 썼는지 알고 계신가요?</p>
+            </div>
+
+            <div class="tool-wrapper diet-tool">
+                <div class="calculator-inputs">
+                    <div class="calc-group">
+                        <label for="pt-cost">PT 및 1:1 코칭 비용 (누적)</label>
+                        <input type="number" id="pt-cost" placeholder="0" min="0">
+                        <span class="unit">만원</span>
+                    </div>
+                    <div class="calc-group">
+                        <label for="gym-cost">헬스장 및 운동시설 등록비</label>
+                        <input type="number" id="gym-cost" placeholder="0" min="0">
+                        <span class="unit">만원</span>
+                    </div>
+                    <div class="calc-group">
+                        <label for="supple-cost">다이어트 보조제 및 약 처방비</label>
+                        <input type="number" id="supple-cost" placeholder="0" min="0">
+                        <span class="unit">만원</span>
+                    </div>
+                    <div class="calc-group">
+                        <label for="food-cost">식단 도시락 및 저칼로리 식품 구매비</label>
+                        <input type="number" id="food-cost" placeholder="0" min="0">
+                        <span class="unit">만원</span>
+                    </div>
+                    <div class="calc-group">
+                        <label for="yoyo-cost">요요 반복으로 인한 추가 지출 (의류, 재등록 등)</label>
+                        <input type="number" id="yoyo-cost" placeholder="0" min="0">
+                        <span class="unit">만원</span>
+                    </div>
+                </div>
+                <button id="calc-diet-btn" class="main-btn highlight-btn">내 지출 비용 계산하기</button>
+
+                <div id="diet-result" class="diet-result-area" style="display: none;">
+                    <h3>지금까지 다이어트 실패로 지불한 총 비용은?</h3>
+                    <div class="total-cost-display">
+                        <span id="total-cost-value">0</span><span class="total-unit">만원</span>
+                    </div>
+                    <p class="emotional-msg" id="emotional-msg"></p>
+                    <div class="cta-box">
+                        <p>지출은 늘어나고 몸은 그대로라면? 이제는 방법이 바뀌어야 합니다.</p>
+                        <a href="#contact" class="cta-link">전문가 유료 코칭 문의하기</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="description-box">
+                <h3>왜 비용을 계산해봐야 할까요?</h3>
+                <p>무의미하게 반복되는 지출은 경제적 부담뿐만 아니라 심리적 박탈감을 줍니다. 내가 쏟아부은 비용을 객관적으로 마주할 때, 비로소 '실패하지 않는 다이어트'를 시작할 용기가 생깁니다. 지금까지의 매몰비용을 정리하고 새로운 시작을 준비하세요.</p>
+            </div>
+        </section>
+
+        <hr class="divider">
+
         <!-- Lotto Generator Section -->
         <section id="lotto-generator" class="content-section">
             <div class="section-header">
