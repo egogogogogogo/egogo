@@ -1,27 +1,8 @@
-// 1. Google Translate Logic (Fixed for instant response)
-function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        includedLanguages: 'ko,en,ja,zh-CN,es,fr',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
-    }, 'google_translate_element');
-}
-
-function changeLanguage(langCode) {
-    if (!langCode) return;
-    const googleCombo = document.querySelector('.goog-te-combo');
-    if (googleCombo) {
-        googleCombo.value = langCode;
-        googleCombo.dispatchEvent(new Event('change'));
-    } else {
-        // Retry if combo not yet loaded
-        setTimeout(() => changeLanguage(langCode), 500);
-    }
-}
-
-// 2. Real-time RSS News (English only)
-const FEEDS = ['https://grist.org/feed/', 'https://e360.yale.edu/feed'];
+// 1. RSS News Fetching (Strict 12 items, 3-column distribution)
+const FEEDS = [
+    'https://grist.org/feed/',
+    'https://e360.yale.edu/feed'
+];
 
 async function loadNews() {
     const grid = document.getElementById('news-grid');
@@ -32,13 +13,13 @@ async function loadNews() {
             fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(f)}`).then(r => r.json())
         ));
 
-        let items = results.flatMap(r => r.items || []).sort((a,b) => new Date(b.pubDate) - new Date(a.pubDate)).slice(0, 12);
+        let items = results.flatMap(r => r.items || [])
+            .sort((a,b) => new Date(b.pubDate) - new Date(a.pubDate))
+            .slice(0, 12);
 
         grid.innerHTML = items.map(item => `
             <article class="article-card hover-lift">
-                <div class="hover-zoom">
-                    <img src="${item.thumbnail || 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80'}" alt="News">
-                </div>
+                <img src="${item.thumbnail || 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80'}" alt="Environmental News">
                 <div class="article-content">
                     <span class="article-meta">${new Date(item.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
                     <h3><a href="${item.link}" target="_blank">${item.title}</a></h3>
@@ -46,20 +27,21 @@ async function loadNews() {
             </article>
         `).join('');
     } catch (e) {
-        grid.innerHTML = '<p>Failed to sync global news. Please try again later.</p>';
+        console.error("RSS Error:", e);
+        grid.innerHTML = '<p class="loading-news">Unable to sync global intelligence. Please refresh.</p>';
     }
 }
 
-// 3. Intersection Observer for Chart Animations
-const observerOptions = { threshold: 0.2 };
-const observer = new IntersectionObserver((entries) => {
+// 2. Intersection Observer for Smooth Visual Effects
+const observerOptions = { threshold: 0.15 };
+const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             if (entry.target.classList.contains('bar-anim')) {
                 entry.target.style.height = entry.target.dataset.targetHeight;
             }
             entry.target.classList.add('in-view');
-            observer.unobserve(entry.target);
+            scrollObserver.unobserve(entry.target);
         }
     });
 }, observerOptions);
@@ -68,24 +50,23 @@ function initAnimations() {
     document.querySelectorAll('.bar-anim').forEach(bar => {
         bar.dataset.targetHeight = bar.style.height;
         bar.style.height = '0';
-        observer.observe(bar);
+        scrollObserver.observe(bar);
     });
-    document.querySelectorAll('.vivid-card, .article-card, .product-card').forEach(card => {
-        observer.observe(card);
+    document.querySelectorAll('.vivid-card, .article-card, .product-card, .report-card').forEach(el => {
+        scrollObserver.observe(el);
     });
 }
 
-// 4. Scroll Spy (Navigation highlight)
+// 3. Scroll Spy (Precise Navigation Highlight)
 const sections = document.querySelectorAll('.scroll-section');
 const navLinks = document.querySelectorAll('.nav-link');
 
 window.addEventListener('scroll', () => {
     let current = '';
-    const offset = window.innerHeight / 3;
+    const scrollPos = window.pageYOffset + (window.innerHeight / 3);
 
     sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (pageYOffset >= (sectionTop - offset)) {
+        if (scrollPos >= section.offsetTop) {
             current = section.getAttribute('id');
         }
     });
@@ -98,7 +79,7 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// 5. Init
+// 4. Initialization
 document.addEventListener('DOMContentLoaded', () => {
     loadNews();
     initAnimations();
