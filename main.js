@@ -1,4 +1,26 @@
-// 1. RSS News Fetching (English)
+// 1. Google Translate Logic (Fixed for instant response)
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'ko,en,ja,zh-CN,es,fr',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+    }, 'google_translate_element');
+}
+
+function changeLanguage(langCode) {
+    if (!langCode) return;
+    const googleCombo = document.querySelector('.goog-te-combo');
+    if (googleCombo) {
+        googleCombo.value = langCode;
+        googleCombo.dispatchEvent(new Event('change'));
+    } else {
+        // Retry if combo not yet loaded
+        setTimeout(() => changeLanguage(langCode), 500);
+    }
+}
+
+// 2. Real-time RSS News (English only)
 const FEEDS = ['https://grist.org/feed/', 'https://e360.yale.edu/feed'];
 
 async function loadNews() {
@@ -28,34 +50,42 @@ async function loadNews() {
     }
 }
 
-// 2. Intersection Observer for Chart Animations
-const observerOptions = { threshold: 0.5 };
+// 3. Intersection Observer for Chart Animations
+const observerOptions = { threshold: 0.2 };
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.height = entry.target.dataset.targetHeight;
+            if (entry.target.classList.contains('bar-anim')) {
+                entry.target.style.height = entry.target.dataset.targetHeight;
+            }
+            entry.target.classList.add('in-view');
             observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
 
-function initCharts() {
+function initAnimations() {
     document.querySelectorAll('.bar-anim').forEach(bar => {
         bar.dataset.targetHeight = bar.style.height;
-        bar.style.height = '0'; // Reset for animation
+        bar.style.height = '0';
         observer.observe(bar);
+    });
+    document.querySelectorAll('.vivid-card, .article-card, .product-card').forEach(card => {
+        observer.observe(card);
     });
 }
 
-// 3. Scroll Spy (Navigation highlight)
+// 4. Scroll Spy (Navigation highlight)
 const sections = document.querySelectorAll('.scroll-section');
 const navLinks = document.querySelectorAll('.nav-link');
 
 window.addEventListener('scroll', () => {
     let current = '';
+    const offset = window.innerHeight / 3;
+
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        if (pageYOffset >= (sectionTop - 150)) {
+        if (pageYOffset >= (sectionTop - offset)) {
             current = section.getAttribute('id');
         }
     });
@@ -68,27 +98,8 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// 4. Language Translation Logic
-function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        includedLanguages: 'ko,en,ja,zh-CN,es,fr',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
-    }, 'google_translate_element');
-}
-
-function changeLanguage(langCode) {
-    if (!langCode) return;
-    const googleCombo = document.querySelector('.goog-te-combo');
-    if (googleCombo) {
-        googleCombo.value = langCode;
-        googleCombo.dispatchEvent(new Event('change'));
-    }
-}
-
 // 5. Init
 document.addEventListener('DOMContentLoaded', () => {
     loadNews();
-    initCharts();
+    initAnimations();
 });
