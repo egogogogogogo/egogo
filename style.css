@@ -145,3 +145,16 @@ h1 {
 .submit-btn:hover {
     background-color: var(--btn-hover-bg-color);
 }
+
+.disqus-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: white; /* Disqus looks best on white or its own themed background */
+    border-radius: 12px;
+}
+
+[data-theme="dark"] .disqus-container {
+    background-color: #f8f8f8; /* Slightly off-white for better contrast in dark mode */
+}
