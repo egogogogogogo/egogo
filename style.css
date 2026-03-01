@@ -32,13 +32,115 @@ body {
 
 .container {
     text-align: center;
+    max-width: 800px;
+    width: 90%;
 }
 
 h1 {
     font-size: 3rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
+.main-btn {
+    background-color: var(--btn-bg-color);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.main-btn:hover {
+    background-color: var(--btn-hover-bg-color);
+}
+
+#theme-toggle {
+    background-color: var(--btn-bg-color);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.theme-switch-wrapper {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+.divider {
+    border: none;
+    border-top: 2px solid var(--item-bg-color);
+    margin: 3rem 0;
+    width: 100%;
+}
+
+/* Animal Test Styles */
+.animal-test {
+    margin-bottom: 3rem;
+}
+
+.upload-area {
+    margin: 2rem 0;
+}
+
+.image-preview {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+#face-image {
+    max-width: 300px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.loading {
+    font-size: 1.2rem;
+    margin: 2rem 0;
+}
+
+.prediction-bar-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    gap: 1rem;
+}
+
+.prediction-label {
+    width: 100px;
+    text-align: right;
+    font-weight: bold;
+}
+
+.bar-wrapper {
+    flex-grow: 1;
+    background-color: var(--item-bg-color);
+    border-radius: 10px;
+    height: 25px;
+    overflow: hidden;
+}
+
+.bar {
+    height: 100%;
+    background-color: var(--btn-bg-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    transition: width 0.5s ease;
+}
+
+/* Lotto Styles */
 .lotto-sets-container {
     display: flex;
     flex-direction: column;
@@ -62,35 +164,9 @@ h1 {
     align-items: center;
     font-size: 1.5rem;
     font-weight: bold;
-    transition: background-color 0.3s ease;
 }
 
-#generate-btn, #theme-toggle {
-    background-color: var(--btn-bg-color);
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-}
-
-#generate-btn:hover, #theme-toggle:hover {
-    background-color: var(--btn-hover-bg-color);
-}
-
-.divider {
-    border: none;
-    border-top: 2px solid var(--item-bg-color);
-    margin: 3rem 0;
-    width: 100%;
-}
-
+/* Contact Form Styles */
 .contact-form {
     max-width: 500px;
     margin: 0 auto;
@@ -98,13 +174,6 @@ h1 {
     background-color: var(--item-bg-color);
     padding: 2rem;
     border-radius: 12px;
-    transition: background-color 0.3s ease;
-}
-
-.contact-form h2 {
-    margin-top: 0;
-    margin-bottom: 1.5rem;
-    text-align: center;
 }
 
 .form-group {
@@ -125,8 +194,6 @@ h1 {
     background-color: var(--bg-color);
     color: var(--text-color);
     box-sizing: border-box;
-    font-family: inherit;
-    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .submit-btn {
@@ -139,22 +206,17 @@ h1 {
     cursor: pointer;
     font-size: 1.1rem;
     font-weight: bold;
-    transition: background-color 0.3s ease;
 }
 
-.submit-btn:hover {
-    background-color: var(--btn-hover-bg-color);
-}
-
+/* Disqus Styles */
 .disqus-container {
     width: 100%;
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 1rem;
-    background-color: white; /* Disqus looks best on white or its own themed background */
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #f9f9f9;
     border-radius: 12px;
 }
 
 [data-theme="dark"] .disqus-container {
-    background-color: #f8f8f8; /* Slightly off-white for better contrast in dark mode */
+    background-color: #ffffff;
 }

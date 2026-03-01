@@ -3,17 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lotto Number Generator</title>
+    <title>Animal Face Test & Lotto Generator</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 </head>
 <body>
     <div class="theme-switch-wrapper">
         <button id="theme-toggle">Dark Mode</button>
     </div>
     <div class="container">
-        <h1>Lotto Number Generator</h1>
-        <div id="lotto-sets-container" class="lotto-sets-container"></div>
-        <button id="generate-btn">Generate Numbers</button>
+        <section class="animal-test">
+            <h1>동물상 테스트</h1>
+            <p>나의 얼굴은 강아지상일까, 고양이상일까?</p>
+            
+            <div id="upload-area" class="upload-area">
+                <input type="file" id="image-input" accept="image/*" hidden>
+                <button id="upload-btn" class="main-btn">사진 업로드하기</button>
+                <div id="image-preview" class="image-preview">
+                    <img id="face-image" src="" alt="Face Preview" style="display: none; max-width: 100%; border-radius: 10px;">
+                </div>
+            </div>
+
+            <div id="loading" class="loading" style="display: none;">
+                <p>모델 분석 중...</p>
+            </div>
+
+            <div id="result-area" class="result-area" style="display: none;">
+                <h2 id="result-title">분석 결과</h2>
+                <div id="label-container" class="label-container"></div>
+                <button id="retry-btn" class="main-btn" style="margin-top: 20px;">다시 하기</button>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <section class="lotto-generator">
+            <h1>Lotto Number Generator</h1>
+            <div id="lotto-sets-container" class="lotto-sets-container"></div>
+            <button id="generate-btn" class="main-btn">Generate Numbers</button>
+        </section>
 
         <hr class="divider">
 
