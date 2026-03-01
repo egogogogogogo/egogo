@@ -1,22 +1,26 @@
-// 1. Language Translation Logic (Limited to 10 Languages)
+// 1. Language Translation Logic
 function googleTranslateElementInit() {
     new google.translate.TranslateElement({
         pageLanguage: 'ko',
-        includedLanguages: 'ko,en,ja,zh-CN,es,fr,de,vi,pt',
+        includedLanguages: 'ko,en,ja,zh-CN,es,fr,de,vi',
         layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
         autoDisplay: false
     }, 'google_translate_element');
 }
 
 function changeLanguage(langCode) {
-    const googleSelect = document.querySelector('.goog-te-combo');
-    if (googleSelect) {
-        googleSelect.value = langCode;
-        googleSelect.dispatchEvent(new Event('change'));
+    if (!langCode) return;
+    const googleCombo = document.querySelector('.goog-te-combo');
+    if (googleCombo) {
+        googleCombo.value = langCode;
+        googleCombo.dispatchEvent(new Event('change'));
+    } else {
+        // If combo not ready, retry after a short delay
+        setTimeout(() => changeLanguage(langCode), 500);
     }
 }
 
-// 2. Real-time RSS News Fetching (using rss2json API)
+// 2. Real-time RSS News Fetching
 const NEWS_FEEDS = [
     'https://grist.org/feed/',
     'https://e360.yale.edu/feed'
@@ -27,17 +31,15 @@ async function fetchNews() {
     if (!newsGrid) return;
 
     try {
-        // Fetch from multiple feeds and combine
         const allArticles = [];
         for (const feed of NEWS_FEEDS) {
             const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed)}`);
             const data = await response.json();
             if (data.status === 'ok') {
-                allArticles.push(...data.items.slice(0, 3)); // Get top 3 from each
+                allArticles.push(...data.items.slice(0, 3));
             }
         }
 
-        // Sort by date and render
         allArticles.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
         
         newsGrid.innerHTML = allArticles.map(item => `
@@ -53,8 +55,7 @@ async function fetchNews() {
         `).join('');
 
     } catch (error) {
-        console.error('Error fetching news:', error);
-        newsGrid.innerHTML = '<p>뉴스를 불러오는 데 실패했습니다. 잠시 후 다시 시도해주세요.</p>';
+        newsGrid.innerHTML = '<p>뉴스를 불러오는 중입니다. 잠시만 기다려주세요.</p>';
     }
 }
 
@@ -66,7 +67,6 @@ window.addEventListener('scroll', () => {
     let current = '';
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
         if (pageYOffset >= (sectionTop - 150)) {
             current = section.getAttribute('id');
         }
@@ -84,7 +84,7 @@ window.addEventListener('scroll', () => {
 document.addEventListener('DOMContentLoaded', () => {
     fetchNews();
     
-    // Theme logic (if kept)
+    // Auto-init theme
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
 });

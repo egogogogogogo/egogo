@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>White earth | For a Brighter, Cleaner Planet</title>
-    
-    <!-- SEO & Meta -->
     <meta name="description" content="White earth는 글로벌 환경 이슈와 지속 가능한 미래를 다루는 저널리즘 플랫폼입니다.">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌍</text></svg>">
     
@@ -24,7 +22,7 @@
             </div>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#home" class="nav-link">Home</a></li>
                     <li><a href="#news" class="nav-link">News</a></li>
                     <li><a href="#analysis" class="nav-link">Analysis</a></li>
                     <li><a href="#report" class="nav-link">Reports</a></li>
@@ -33,9 +31,10 @@
                 </ul>
             </nav>
             <div class="header-actions">
-                <div class="lang-selector">
-                    <i class="fas fa-globe"></i>
+                <div class="lang-selector-btn">
+                    <i class="fas fa-language"></i>
                     <select id="language-select" onchange="changeLanguage(this.value)">
+                        <option value="">Language</option>
                         <option value="ko">한국어</option>
                         <option value="en">English</option>
                         <option value="ja">日本語</option>
@@ -44,7 +43,6 @@
                         <option value="fr">Français</option>
                         <option value="de">Deutsch</option>
                         <option value="vi">Tiếng Việt</option>
-                        <option value="pt">Português</option>
                     </select>
                 </div>
                 <button class="subscribe-btn">Join</button>
@@ -52,8 +50,8 @@
         </div>
     </header>
 
-    <!-- Hidden Google Translate Element -->
-    <div id="google_translate_element" style="display:none"></div>
+    <!-- Hidden Google Translate -->
+    <div id="google_translate_element" style="visibility:hidden;position:absolute;top:-9999px;"></div>
 
     <main id="main-content">
         
@@ -74,7 +72,7 @@
         <section id="news" class="scroll-section content-padding">
             <div class="section-title">
                 <h2>Real-time Eco News</h2>
-                <p>Grist & Yale e360에서 실시간으로 가져오는 환경 이슈</p>
+                <p>Grist & Yale e360 실시간 환경 저널리즘</p>
             </div>
             <div id="news-grid" class="article-grid">
                 <div class="loading-news">뉴스를 불러오는 중입니다...</div>
@@ -83,9 +81,9 @@
 
         <!-- ANALYSIS SECTION -->
         <section id="analysis" class="scroll-section content-padding alternate-bg">
-            <div class="page-header">
-                <h1>Deep Analysis</h1>
-                <p>현상 너머의 진실을 마주합니다</p>
+            <div class="section-title">
+                <h2>Deep Analysis</h2>
+                <p>데이터로 보는 환경의 진실</p>
             </div>
             <div class="analysis-layout">
                 <article class="main-analysis">
@@ -93,11 +91,11 @@
                     <div class="analysis-content">
                         <span class="category">Special Report</span>
                         <h2>Plastic Ocean: 바다는 더 이상 플라스틱을 견딜 수 없습니다</h2>
-                        <p class="summary">매년 1,200만 톤의 플라스틱이 바다로 흘러갑니다. 이는 매 분마다 쓰레기차 한 대 분량을 바다에 쏟아붓는 것과 같습니다. 2026년 화이트 어스가 분석한 해양 생태계 복원 보고서를 확인하세요.</p>
+                        <p class="summary">매년 1,200만 톤의 플라스틱이 바다로 흘러갑니다. 이는 매 분마다 쓰레기차 한 대 분량을 바다에 쏟아붓는 것과 같습니다.</p>
                         <div class="data-points">
-                            <div class="data-item"><strong>12.7M</strong><span>Tons/Year</span></div>
-                            <div class="data-item"><strong>2050</strong><span>Fish < Plastic</span></div>
-                            <div class="data-item"><strong>83%</strong><span>Microplastic</span></div>
+                            <div class="data-item"><strong class="highlight-num">12.7M</strong><span>Tons/Year</span></div>
+                            <div class="data-item"><strong class="highlight-num">2050</strong><span>Fish < Plastic</span></div>
+                            <div class="data-item"><strong class="highlight-num">83%</strong><span>Microplastic</span></div>
                         </div>
                     </div>
                 </article>
@@ -112,23 +110,32 @@
             </div>
             <div class="reports-grid">
                 <div class="report-card">
-                    <div class="report-cover blue">UNEP</div>
+                    <div class="report-img-box">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" alt="UNEP Report">
+                    </div>
                     <div class="report-info">
-                        <h3>UN 해양 플라스틱 협약</h3>
+                        <span class="agency-tag">UNEP</span>
+                        <h3>UN 해양 플라스틱 협약 로드맵</h3>
                         <a href="https://www.unep.org/resources/report" target="_blank" class="download-btn">Full Report</a>
                     </div>
                 </div>
                 <div class="report-card">
-                    <div class="report-cover green">IPCC</div>
+                    <div class="report-img-box">
+                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80" alt="IPCC Report">
+                    </div>
                     <div class="report-info">
-                        <h3>제7차 기후변화 종합보고서</h3>
+                        <span class="agency-tag">IPCC</span>
+                        <h3>제7차 기후변화 종합보고서 (AR7)</h3>
                         <a href="https://www.ipcc.ch/reports/" target="_blank" class="download-btn">Full Report</a>
                     </div>
                 </div>
                 <div class="report-card">
-                    <div class="report-cover dark">IEA</div>
+                    <div class="report-img-box">
+                        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=600&q=80" alt="IEA Report">
+                    </div>
                     <div class="report-info">
-                        <h3>2026 넷제로 로드맵</h3>
+                        <span class="agency-tag">IEA</span>
+                        <h3>2026 글로벌 넷제로 이행 전망</h3>
                         <a href="https://www.iea.org/reports" target="_blank" class="download-btn">Full Report</a>
                     </div>
                 </div>
@@ -139,21 +146,40 @@
         <section id="shop" class="scroll-section content-padding alternate-bg">
             <div class="section-title">
                 <h2>Eco Innovation</h2>
-                <p>지속 가능한 미래를 위한 혁신적 아이템</p>
+                <p>지구를 구하는 획기적인 아이디어 상품</p>
             </div>
             <div class="product-grid">
                 <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1594761053050-f46e32c0d521?auto=format&fit=crop&w=600&q=80" alt="Mushroom">
+                    <div class="product-img-box">
+                        <img src="https://images.unsplash.com/photo-1591084728795-1149f32d9866?auto=format&fit=crop&w=600&q=80" alt="Mushroom">
+                    </div>
                     <div class="product-info">
-                        <h3>생분해 버섯 가죽 패키징</h3>
+                        <span class="badge">Material</span>
+                        <h3>생분해 버섯 패키징</h3>
+                        <p>스티로폼을 대체하는 균사체 기술</p>
                         <a href="https://www.ecovative.com/" target="_blank" class="buy-btn">아이디어 확인</a>
                     </div>
                 </div>
                 <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1617103023188-fb6c08d8b8b4?auto=format&fit=crop&w=600&q=80" alt="Solar">
+                    <div class="product-img-box">
+                        <img src="https://images.unsplash.com/photo-1617103023188-fb6c08d8b8b4?auto=format&fit=crop&w=600&q=80" alt="Solar">
+                    </div>
                     <div class="product-info">
-                        <h3>태양광 충전 스마트 백팩</h3>
+                        <span class="badge">Tech</span>
+                        <h3>태양광 스마트 백팩</h3>
+                        <p>이동하며 에너지를 생산하는 가방</p>
                         <a href="https://www.voltaicsystems.com/" target="_blank" class="buy-btn">아이디어 확인</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <img src="https://images.unsplash.com/photo-1581578731522-aa9ecfa0e497?auto=format&fit=crop&w=600&q=80" alt="Lifestraw">
+                    </div>
+                    <div class="product-info">
+                        <span class="badge">Life</span>
+                        <h3>휴대용 정수 빨대</h3>
+                        <p>깨끗한 물을 위한 생존 키트</p>
+                        <a href="https://lifestraw.com/" target="_blank" class="buy-btn">아이디어 확인</a>
                     </div>
                 </div>
             </div>
@@ -163,11 +189,24 @@
         <section id="about" class="scroll-section content-padding">
             <div class="brand-story">
                 <h1>White earth Project</h1>
-                <p>우리는 얼룩진 지구를 다시 하얗고 깨끗하게 닦아내고자 합니다. 우리의 모든 콘텐츠와 수익의 일부는 지구 복원을 위해 사용됩니다.</p>
+                <p>우리는 얼룩진 지구를 다시 하얗고 깨끗하게 닦아내고자 합니다.</p>
                 <div class="mission-grid">
                     <div class="mission-item"><i class="fas fa-eye"></i><h4>See</h4><p>기후 위기를 감시합니다.</p></div>
                     <div class="mission-item"><i class="fas fa-pen"></i><h4>Write</h4><p>진실을 기록합니다.</p></div>
                     <div class="mission-item"><i class="fas fa-heart"></i><h4>Act</h4><p>직접 행동합니다.</p></div>
+                </div>
+
+                <div class="partnership-box">
+                    <h3>Partnership Inquiry</h3>
+                    <p>White earth와 함께 지구를 위한 하얀 변화를 만들어갈 파트너를 찾습니다.</p>
+                    <form action="https://formspree.io/f/xlgwkleq" method="POST" class="contact-form">
+                        <div class="form-row">
+                            <input type="text" name="name" placeholder="Name / Company" required>
+                            <input type="email" name="email" placeholder="Email" required>
+                        </div>
+                        <textarea name="message" placeholder="Proposal / Inquiry Details" rows="4" required></textarea>
+                        <button type="submit" class="submit-btn">Send Inquiry</button>
+                    </form>
                 </div>
             </div>
         </section>
