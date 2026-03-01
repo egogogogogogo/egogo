@@ -1,5 +1,27 @@
 const lottoSetsContainer = document.getElementById('lotto-sets-container');
 const generateBtn = document.getElementById('generate-btn');
+const themeToggle = document.getElementById('theme-toggle');
+
+// Theme switching logic
+const currentTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', currentTheme);
+updateThemeButtonText(currentTheme);
+
+themeToggle.addEventListener('click', () => {
+    let theme = document.documentElement.getAttribute('data-theme');
+    if (theme === 'dark') {
+        theme = 'light';
+    } else {
+        theme = 'dark';
+    }
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    updateThemeButtonText(theme);
+});
+
+function updateThemeButtonText(theme) {
+    themeToggle.textContent = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
+}
 
 function generateNumberSet() {
     const numbers = new Set();

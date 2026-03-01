@@ -1,8 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
 
+:root {
+    --bg-color: #ffffff;
+    --text-color: #121212;
+    --item-bg-color: #f0f0f0;
+    --btn-bg-color: #4CAF50;
+    --btn-hover-bg-color: #45a049;
+    --container-bg-color: transparent;
+}
+
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --item-bg-color: #333333;
+    --btn-bg-color: #4CAF50;
+    --btn-hover-bg-color: #45a049;
+}
+
 body {
-    background-color: #121212;
-    color: #ffffff;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     font-family: 'Playfair Display', serif;
     display: flex;
     justify-content: center;
@@ -10,6 +27,7 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 2rem 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -35,7 +53,7 @@ h1 {
 }
 
 .lotto-number {
-    background-color: #333333;
+    background-color: var(--item-bg-color);
     border-radius: 50%;
     width: 60px;
     height: 60px;
@@ -44,10 +62,11 @@ h1 {
     align-items: center;
     font-size: 1.5rem;
     font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
-#generate-btn {
-    background-color: #4CAF50;
+#generate-btn, #theme-toggle {
+    background-color: var(--btn-bg-color);
     border: none;
     color: white;
     padding: 15px 32px;
@@ -61,6 +80,12 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
-#generate-btn:hover {
-    background-color: #45a049;
+#generate-btn:hover, #theme-toggle:hover {
+    background-color: var(--btn-hover-bg-color);
+}
+
+.theme-switch-wrapper {
+    position: fixed;
+    top: 20px;
+    right: 20px;
 }
