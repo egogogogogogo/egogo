@@ -6,10 +6,7 @@
     <title>White earth | For a Brighter, Cleaner Planet</title>
     
     <!-- SEO & Meta -->
-    <meta name="description" content="White earth는 기후 변화, 리사이클링, 지속 가능한 기술을 다루는 글로벌 환경 저널리즘 플랫폼입니다.">
-    <meta name="keywords" content="White earth, 환경 뉴스, 기후 위기, 업사이클링, 2026 환경 보고서, 친환경 제품">
-    
-    <!-- Brand Icon (Favicon) -->
+    <meta name="description" content="White earth는 글로벌 환경 이슈와 지속 가능한 미래를 다루는 저널리즘 플랫폼입니다.">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌍</text></svg>">
     
     <link rel="stylesheet" href="style.css">
@@ -19,87 +16,88 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7705975032260531" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- Google Translate Script -->
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'ko', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
     <!-- Navigation -->
     <header class="site-header">
         <div class="header-container">
             <div class="logo">
-                <a href="#home" onclick="navigateTo('home')">White earth<span class="dot">.</span></a>
+                <a href="#home">White earth<span class="dot">.</span></a>
             </div>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="#news" onclick="navigateTo('news')" class="active">News & Trend</a></li>
-                    <li><a href="#analysis" onclick="navigateTo('analysis')">Analysis</a></li>
-                    <li><a href="#report" onclick="navigateTo('report')">Reports</a></li>
-                    <li><a href="#shop" onclick="navigateTo('shop')">Eco Shop</a></li>
-                    <li><a href="#about" onclick="navigateTo('about')">Brand Story</a></li>
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#news" class="nav-link">News</a></li>
+                    <li><a href="#analysis" class="nav-link">Analysis</a></li>
+                    <li><a href="#report" class="nav-link">Reports</a></li>
+                    <li><a href="#shop" class="nav-link">Eco Shop</a></li>
+                    <li><a href="#about" class="nav-link">Brand Story</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
-                <div id="google_translate_element"></div>
-                <button class="subscribe-btn">Join Us</button>
-            </div>
-            <div class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
+                <div class="lang-selector">
+                    <i class="fas fa-globe"></i>
+                    <select id="language-select" onchange="changeLanguage(this.value)">
+                        <option value="ko">한국어</option>
+                        <option value="en">English</option>
+                        <option value="ja">日本語</option>
+                        <option value="zh-CN">简体中文</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                        <option value="vi">Tiếng Việt</option>
+                        <option value="pt">Português</option>
+                    </select>
+                </div>
+                <button class="subscribe-btn">Join</button>
             </div>
         </div>
     </header>
 
+    <!-- Hidden Google Translate Element -->
+    <div id="google_translate_element" style="display:none"></div>
+
     <main id="main-content">
         
         <!-- HOME SECTION -->
-        <section id="home" class="page-section active">
+        <section id="home" class="scroll-section">
             <div class="hero-section">
                 <div class="hero-text">
-                    <span class="tag">Global Issue 2026</span>
-                    <h1>탄소 제로를 향한<br>마지막 골든 타임</h1>
-                    <p>2026년, 인류는 유례없는 기후 전환점에 서 있습니다. White earth가 제안하는 '하얀 지구' 프로젝트에 참여하여 지구의 온도를 낮추는 변화를 시작하세요.</p>
-                    <a href="#analysis" class="read-more-btn">심층 분석 리포트 보기 <i class="fas fa-arrow-right"></i></a>
+                    <span class="tag">Planet Guardian</span>
+                    <h1>지구를 다시<br>순수하게, 하얗게</h1>
+                    <p>우리는 지구가 보내는 조용한 경고에 귀를 기울입니다. 기술과 저널리즘으로 만드는 가장 깨끗한 변화, White earth와 함께하세요.</p>
+                    <a href="#news" class="cta-primary">최신 뉴스 보기</a>
                 </div>
                 <div class="hero-image main-hero-img"></div>
             </div>
+        </section>
 
-            <!-- News Feed -->
-            <div class="article-feed-container">
-                <div class="section-title">
-                    <h2>Latest Environmental News</h2>
-                    <p>Grist 및 Yale e360 등 글로벌 파트너의 최신 소식</p>
-                </div>
-                <div class="article-grid" id="news-grid">
-                    <!-- JS will populate -->
-                </div>
-                <div class="update-guide">
-                    <p><i class="fas fa-info-circle"></i> <strong>Tip:</strong> 이 섹션의 뉴스는 매일 오전 9시 글로벌 환경 매거진의 RSS 피드를 통해 자동 업데이트됩니다.</p>
-                </div>
+        <!-- NEWS SECTION -->
+        <section id="news" class="scroll-section content-padding">
+            <div class="section-title">
+                <h2>Real-time Eco News</h2>
+                <p>Grist & Yale e360에서 실시간으로 가져오는 환경 이슈</p>
+            </div>
+            <div id="news-grid" class="article-grid">
+                <div class="loading-news">뉴스를 불러오는 중입니다...</div>
             </div>
         </section>
 
         <!-- ANALYSIS SECTION -->
-        <section id="analysis" class="page-section">
+        <section id="analysis" class="scroll-section content-padding alternate-bg">
             <div class="page-header">
-                <h1>Deep Analysis: Plastic Ocean</h1>
-                <p>데이터로 증명하는 해양 오염의 실태</p>
+                <h1>Deep Analysis</h1>
+                <p>현상 너머의 진실을 마주합니다</p>
             </div>
             <div class="analysis-layout">
                 <article class="main-analysis">
-                    <div class="analysis-img-box">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?auto=format&fit=crop&w=1200&q=80" alt="Ocean Plastic Analysis">
-                    </div>
+                    <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?auto=format&fit=crop&w=1200&q=80" alt="Plastic Ocean">
                     <div class="analysis-content">
                         <span class="category">Special Report</span>
-                        <h2>미세 플라스틱 역습: 우리의 식탁까지 도달한 5mm의 위협</h2>
-                        <p class="summary">2026년 조사에 따르면, 전 세계 수돗물의 83%에서 미세 플라스틱이 검출되었습니다. 단순한 환경 문제를 넘어 인류의 건강을 직접적으로 위협하는 해양 쓰레기 문제의 해결책을 제시합니다.</p>
+                        <h2>Plastic Ocean: 바다는 더 이상 플라스틱을 견딜 수 없습니다</h2>
+                        <p class="summary">매년 1,200만 톤의 플라스틱이 바다로 흘러갑니다. 이는 매 분마다 쓰레기차 한 대 분량을 바다에 쏟아붓는 것과 같습니다. 2026년 화이트 어스가 분석한 해양 생태계 복원 보고서를 확인하세요.</p>
                         <div class="data-points">
-                            <div class="data-item"><strong>12.7M</strong><span>Tons of Plastic/Year</span></div>
-                            <div class="data-item"><strong>800+</strong><span>Affected Species</span></div>
-                            <div class="data-item"><strong>2050</strong><span>Fish &lt; Plastic</span></div>
+                            <div class="data-item"><strong>12.7M</strong><span>Tons/Year</span></div>
+                            <div class="data-item"><strong>2050</strong><span>Fish < Plastic</span></div>
+                            <div class="data-item"><strong>83%</strong><span>Microplastic</span></div>
                         </div>
                     </div>
                 </article>
@@ -107,109 +105,69 @@
         </section>
 
         <!-- REPORTS SECTION -->
-        <section id="report" class="page-section">
-            <div class="page-header">
-                <h1>2025-2026 Environmental Reports</h1>
-                <p>국제 환경 기구 및 화이트 어스 자체 발행 리포트</p>
+        <section id="report" class="scroll-section content-padding">
+            <div class="section-title">
+                <h2>Global Reports</h2>
+                <p>2025-2026 주요 환경기구 공식 발행 자료</p>
             </div>
             <div class="reports-grid">
                 <div class="report-card">
-                    <div class="report-cover blue">UNEP<br>2026</div>
+                    <div class="report-cover blue">UNEP</div>
                     <div class="report-info">
-                        <h3>UN 해양 플라스틱 규제 협약</h3>
-                        <p>2026년 전 세계 플라스틱 생산 중단 로드맵</p>
-                        <a href="https://www.unep.org/resources/report" target="_blank" class="download-btn">View Official Report</a>
+                        <h3>UN 해양 플라스틱 협약</h3>
+                        <a href="https://www.unep.org/resources/report" target="_blank" class="download-btn">Full Report</a>
                     </div>
                 </div>
                 <div class="report-card">
-                    <div class="report-cover green">IPCC<br>AR7</div>
+                    <div class="report-cover green">IPCC</div>
                     <div class="report-info">
-                        <h3>IPCC 제7차 기후 변화 리포트</h3>
-                        <p>1.5도 억제 시나리오 및 국가별 대응 전략</p>
-                        <a href="https://www.ipcc.ch/reports/" target="_blank" class="download-btn">View Official Report</a>
+                        <h3>제7차 기후변화 종합보고서</h3>
+                        <a href="https://www.ipcc.ch/reports/" target="_blank" class="download-btn">Full Report</a>
                     </div>
                 </div>
                 <div class="report-card">
-                    <div class="report-cover dark">IEA<br>NETZERO</div>
+                    <div class="report-cover dark">IEA</div>
                     <div class="report-info">
-                        <h3>2026 에너지 전환 전망</h3>
-                        <p>재생 에너지 80% 시대를 위한 글로벌 인프라 분석</p>
-                        <a href="https://www.iea.org/reports" target="_blank" class="download-btn">View Official Report</a>
+                        <h3>2026 넷제로 로드맵</h3>
+                        <a href="https://www.iea.org/reports" target="_blank" class="download-btn">Full Report</a>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- SHOP SECTION -->
-        <section id="shop" class="page-section">
-            <div class="section-header center">
-                <h1>Future Eco-Innovation</h1>
-                <p>지구를 구하는 획기적인 아이디어 상품</p>
+        <section id="shop" class="scroll-section content-padding alternate-bg">
+            <div class="section-title">
+                <h2>Eco Innovation</h2>
+                <p>지속 가능한 미래를 위한 혁신적 아이템</p>
             </div>
             <div class="product-grid">
                 <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1594761053050-f46e32c0d521?auto=format&fit=crop&w=600&q=80" alt="Mushroom Packaging">
-                        <span class="badge">Innovation</span>
-                    </div>
+                    <img src="https://images.unsplash.com/photo-1594761053050-f46e32c0d521?auto=format&fit=crop&w=600&q=80" alt="Mushroom">
                     <div class="product-info">
-                        <h3>머쉬룸 베이스 친환경 패키징</h3>
-                        <p>버섯 균사체로 만든 스티로폼 대체제. 45일 내 생분해.</p>
-                        <a href="https://www.ecovative.com/" target="_blank" class="buy-btn">자세히 보기</a>
+                        <h3>생분해 버섯 가죽 패키징</h3>
+                        <a href="https://www.ecovative.com/" target="_blank" class="buy-btn">아이디어 확인</a>
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1617103023188-fb6c08d8b8b4?auto=format&fit=crop&w=600&q=80" alt="Solar Backpack">
-                        <span class="badge">Gadget</span>
-                    </div>
+                    <img src="https://images.unsplash.com/photo-1617103023188-fb6c08d8b8b4?auto=format&fit=crop&w=600&q=80" alt="Solar">
                     <div class="product-info">
                         <h3>태양광 충전 스마트 백팩</h3>
-                        <p>버려진 페트병 25개로 제작된 고성능 태양광 패널 백팩.</p>
-                        <a href="https://www.voltaicsystems.com/" target="_blank" class="buy-btn">자세히 보기</a>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1581578731522-aa9ecfa0e497?auto=format&fit=crop&w=600&q=80" alt="Water Filter Straw">
-                        <span class="badge">Life</span>
-                    </div>
-                    <div class="product-info">
-                        <h3>휴대용 고성능 정수 빨대</h3>
-                        <p>전력 없이 박테리아 99.9% 제거. 아프리카 아이들을 돕습니다.</p>
-                        <a href="https://lifestraw.com/" target="_blank" class="buy-btn">자세히 보기</a>
+                        <a href="https://www.voltaicsystems.com/" target="_blank" class="buy-btn">아이디어 확인</a>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- BRAND STORY SECTION -->
-        <section id="about" class="page-section">
+        <section id="about" class="scroll-section content-padding">
             <div class="brand-story">
-                <div class="story-content">
-                    <h1>White earth:<br>다시 투명하고 하얀 지구로</h1>
-                    <p>
-                        우리는 지구가 겪고 있는 고열을 '하얗게' 식히고자 합니다.<br>
-                        <strong>"White earth"</strong>는 오염으로 얼룩진 지구를 정화하여<br>
-                        아이들이 마음껏 뛰어놀 수 있는 순수한 상태로 되돌리는 비전을 담고 있습니다.
-                    </p>
-                    <div class="mission-grid">
-                        <div class="mission-item">
-                            <i class="fas fa-leaf"></i>
-                            <h4>Listen (귀 기울이기)</h4>
-                            <p>지구가 보내는 기후 위기 신호를 데이터로 수집하고 전달합니다.</p>
-                        </div>
-                        <div class="mission-item">
-                            <i class="fas fa-recycle"></i>
-                            <h4>Circulate (순환하기)</h4>
-                            <p>자원이 쓰레기가 되지 않는 순환 경제 모델을 지지합니다.</p>
-                        </div>
-                        <div class="mission-item">
-                            <i class="fas fa-hand-holding-heart"></i>
-                            <h4>Restore (복원하기)</h4>
-                            <p>매출의 일부를 숲 복원과 해양 정화에 직접 투자합니다.</p>
-                        </div>
-                    </div>
+                <h1>White earth Project</h1>
+                <p>우리는 얼룩진 지구를 다시 하얗고 깨끗하게 닦아내고자 합니다. 우리의 모든 콘텐츠와 수익의 일부는 지구 복원을 위해 사용됩니다.</p>
+                <div class="mission-grid">
+                    <div class="mission-item"><i class="fas fa-eye"></i><h4>See</h4><p>기후 위기를 감시합니다.</p></div>
+                    <div class="mission-item"><i class="fas fa-pen"></i><h4>Write</h4><p>진실을 기록합니다.</p></div>
+                    <div class="mission-item"><i class="fas fa-heart"></i><h4>Act</h4><p>직접 행동합니다.</p></div>
                 </div>
             </div>
         </section>
@@ -217,21 +175,11 @@
     </main>
 
     <footer class="site-footer">
-        <div class="footer-inner">
-            <div class="footer-col">
-                <div class="footer-logo">White earth.</div>
-                <p>For a Brighter, Cleaner Planet.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Contact</h4>
-                <p>partnership@whiteearth.org</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 White earth. All rights reserved.</p>
-        </div>
+        <p>&copy; 2026 White earth. For a Brighter, Cleaner Planet.</p>
     </footer>
 
+    <!-- Scripts -->
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script src="main.js"></script>
 </body>
 </html>
