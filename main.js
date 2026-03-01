@@ -1,8 +1,8 @@
-// 1. Language Translation Logic
+// 1. Google Translate Logic
 function googleTranslateElementInit() {
     new google.translate.TranslateElement({
         pageLanguage: 'ko',
-        includedLanguages: 'ko,en,ja,zh-CN,es,fr,de,vi',
+        includedLanguages: 'ko,en,ja,zh-CN,es,fr',
         layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
         autoDisplay: false
     }, 'google_translate_element');
@@ -19,55 +19,45 @@ function changeLanguage(langCode) {
     }
 }
 
-// 2. Real-time RSS News Fetching (12 articles)
-const NEWS_FEEDS = [
-    'https://grist.org/feed/',
-    'https://e360.yale.edu/feed'
-];
+// 2. RSS News (12 items)
+const FEEDS = ['https://grist.org/feed/', 'https://e360.yale.edu/feed'];
 
-async function fetchNews() {
-    const newsGrid = document.getElementById('news-grid');
-    if (!newsGrid) return;
+async function loadNews() {
+    const grid = document.getElementById('news-grid');
+    if (!grid) return;
 
     try {
-        const allArticles = [];
-        for (const feed of NEWS_FEEDS) {
-            const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed)}`);
-            const data = await response.json();
-            if (data.status === 'ok') {
-                allArticles.push(...data.items.slice(0, 6)); // Each feed gives 6
-            }
-        }
+        const results = await Promise.all(FEEDS.map(f => 
+            fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(f)}`).then(r => r.json())
+        ));
 
-        allArticles.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
-        const finalArticles = allArticles.slice(0, 12); // Limit to 12
-        
-        newsGrid.innerHTML = finalArticles.map(item => `
+        let items = results.flatMap(r => r.items || []).sort((a,b) => new Date(b.pubDate) - new Date(a.pubDate)).slice(0, 12);
+
+        grid.innerHTML = items.map(item => `
             <article class="article-card">
-                <div class="article-img">
-                    <img src="${item.thumbnail || 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80'}" alt="${item.title}">
-                </div>
+                <img src="${item.thumbnail || 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80'}" alt="News">
                 <div class="article-content">
                     <span class="article-meta">${new Date(item.pubDate).toLocaleDateString()}</span>
                     <h3><a href="${item.link}" target="_blank">${item.title}</a></h3>
                 </div>
             </article>
         `).join('');
-
-    } catch (error) {
-        newsGrid.innerHTML = '<p>뉴스를 불러오는 중 오류가 발생했습니다.</p>';
+    } catch (e) {
+        grid.innerHTML = '<p>실시간 뉴스를 불러오지 못했습니다.</p>';
     }
 }
 
-// 3. Scroll Spy Implementation
+// 3. Scroll Spy (Navigation highlight)
 const sections = document.querySelectorAll('.scroll-section');
 const navLinks = document.querySelectorAll('.nav-link');
 
 window.addEventListener('scroll', () => {
     let current = '';
+    const offset = window.innerHeight / 3; // 활성화 타이밍 조절
+
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        if (pageYOffset >= (sectionTop - 150)) {
+        if (pageYOffset >= (sectionTop - offset)) {
             current = section.getAttribute('id');
         }
     });
@@ -80,7 +70,7 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// 4. Initial Load
+// 4. Init
 document.addEventListener('DOMContentLoaded', () => {
-    fetchNews();
+    loadNews();
 });
