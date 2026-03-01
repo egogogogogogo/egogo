@@ -10,6 +10,7 @@
     --navbar-bg: #ffffff;
     --footer-bg: #343a40;
     --footer-text: #f8f9fa;
+    --policy-bg: #f1f3f5;
 }
 
 [data-theme="dark"] {
@@ -18,6 +19,7 @@
     --card-bg: #1e1e1e;
     --divider-color: #333333;
     --navbar-bg: #1e1e1e;
+    --policy-bg: #2b2b2b;
 }
 
 * {
@@ -104,7 +106,7 @@ header {
     color: #6c757d;
 }
 
-/* Tools Style */
+/* Tool Wrapper */
 .tool-wrapper {
     background-color: var(--card-bg);
     border-radius: 20px;
@@ -132,6 +134,63 @@ header {
     transform: translateY(-2px);
 }
 
+/* Lotto Styles */
+.lotto-sets-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
+    align-items: center;
+}
+
+.lotto-row {
+    display: flex;
+    gap: 0.8rem;
+    padding: 1rem;
+    background-color: var(--bg-color);
+    border-radius: 50px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+    transition: background-color 0.3s;
+}
+
+.lotto-ball {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15), inset 0 -3px 5px rgba(0,0,0,0.2);
+}
+
+/* Lotto Ball Colors */
+.ball-yellow { background: radial-gradient(circle at 30% 30%, #ffd43b, #f59f00); }
+.ball-blue { background: radial-gradient(circle at 30% 30%, #4dabf7, #1971c2); }
+.ball-red { background: radial-gradient(circle at 30% 30%, #ff8787, #e03131); }
+.ball-gray { background: radial-gradient(circle at 30% 30%, #adb5bd, #495057); }
+.ball-green { background: radial-gradient(circle at 30% 30%, #69db7c, #2f9e44); }
+
+/* Privacy Policy Style */
+.policy-box {
+    background-color: var(--policy-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.policy-box ul {
+    padding-left: 1.5rem;
+}
+
+.policy-box li {
+    margin-bottom: 1rem;
+}
+
 /* Description Box */
 .description-box {
     background-color: rgba(76, 175, 80, 0.05);
@@ -139,6 +198,7 @@ header {
     padding: 1.5rem;
     margin-top: 2rem;
     border-radius: 0 10px 10px 0;
+    text-align: left;
 }
 
 .description-box h3 {
@@ -182,20 +242,9 @@ header {
     opacity: 0.8;
 }
 
-.footer-links a:hover {
-    opacity: 1;
-}
-
 .copyright {
     font-size: 0.9rem;
     opacity: 0.6;
-}
-
-.disclaimer {
-    font-size: 0.8rem;
-    opacity: 0.5;
-    max-width: 600px;
-    margin: 1rem auto 0;
 }
 
 /* Others */
@@ -222,29 +271,9 @@ header {
     margin-top: 2rem;
 }
 
-.bar-wrapper {
-    background-color: #eee;
-    border-radius: 10px;
-    height: 20px;
-    margin-bottom: 10px;
-    overflow: hidden;
-}
-
-.bar {
-    background-color: var(--primary-color);
-    height: 100%;
-    color: white;
-    font-size: 0.7rem;
-    display: flex;
-    align-items: center;
-    padding-left: 10px;
-}
-
 @media (max-width: 768px) {
-    .nav-menu {
-        display: none;
-    }
-    .section-header h1 {
-        font-size: 2rem;
-    }
+    .nav-menu { display: none; }
+    .section-header h1 { font-size: 2rem; }
+    .lotto-ball { width: 35px; height: 35px; font-size: 0.9rem; }
+    .lotto-row { gap: 0.4rem; padding: 0.8rem; }
 }

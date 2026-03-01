@@ -23,13 +23,24 @@ function updateThemeButtonText(theme) {
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
     });
 });
 
 // Lotto Generation Logic
+function getBallColorClass(num) {
+    if (num <= 10) return 'ball-yellow';
+    if (num <= 20) return 'ball-blue';
+    if (num <= 30) return 'ball-red';
+    if (num <= 40) return 'ball-gray';
+    return 'ball-green';
+}
+
 function generateNumberSet() {
     const numbers = new Set();
     while (numbers.size < 6) {
@@ -42,17 +53,17 @@ function renderNumberSets() {
     lottoSetsContainer.innerHTML = '';
     for (let i = 0; i < 5; i++) {
         const numbers = generateNumberSet();
-        const setElement = document.createElement('div');
-        setElement.classList.add('lotto-numbers');
+        const rowElement = document.createElement('div');
+        rowElement.classList.add('lotto-row');
         
         numbers.forEach(number => {
-            const numberElement = document.createElement('div');
-            numberElement.classList.add('lotto-number');
-            numberElement.textContent = number;
-            setElement.appendChild(numberElement);
+            const ballElement = document.createElement('div');
+            ballElement.classList.add('lotto-ball', getBallColorClass(number));
+            ballElement.textContent = number;
+            rowElement.appendChild(ballElement);
         });
         
-        lottoSetsContainer.appendChild(setElement);
+        lottoSetsContainer.appendChild(rowElement);
     }
 }
 
