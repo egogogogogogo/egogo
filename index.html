@@ -1,99 +1,176 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animal Face Test & Lotto Generator</title>
+    <title>동물상 테스트 & 로또 번호 생성기 | 인공지능 분석 서비스</title>
+    <meta name="description" content="인공지능(AI)을 활용한 동물상 테스트와 행운의 로또 번호 생성 서비스를 제공합니다. 나의 얼굴은 어떤 동물과 닮았는지 확인하고 오늘밤의 행운을 잡으세요.">
+    <meta name="keywords" content="동물상 테스트, 관상 테스트, AI 분석, 로또 번호 생성기, 로또 자동, 강아지상, 고양이상">
     <meta name="google-adsense-account" content="ca-pub-7705975032260531">
+    
+    <!-- Open Graph for Social Media -->
+    <meta property="og:title" content="동물상 테스트 & 로또 번호 생성기">
+    <meta property="og:description" content="AI 동물상 분석과 로또 번호 생성을 한 곳에서! 지금 확인해보세요.">
+    <meta property="og:type" content="website">
+    
     <link rel="stylesheet" href="style.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7705975032260531"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7705975032260531" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 </head>
 <body>
-    <div class="theme-switch-wrapper">
-        <button id="theme-toggle">Dark Mode</button>
-    </div>
-    <div class="container">
-        <section class="animal-test">
-            <h1>동물상 테스트</h1>
-            <p>나의 얼굴은 강아지상일까, 고양이상일까?</p>
+    <header>
+        <nav class="navbar">
+            <div class="nav-logo">Animal & Lotto</div>
+            <ul class="nav-menu">
+                <li><a href="#animal-test">동물상 테스트</a></li>
+                <li><a href="#lotto-generator">로또 생성기</a></li>
+                <li><a href="#about">서비스 소개</a></li>
+                <li><a href="#contact">제휴 문의</a></li>
+            </ul>
+            <button id="theme-toggle">Dark Mode</button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- AI Animal Face Test Section -->
+        <section id="animal-test" class="content-section">
+            <div class="section-header">
+                <h1>AI 동물상 테스트</h1>
+                <p class="subtitle">나의 얼굴은 어떤 동물과 닮았을까요?</p>
+            </div>
             
-            <div id="upload-area" class="upload-area">
-                <input type="file" id="image-input" accept="image/*" hidden>
-                <button id="upload-btn" class="main-btn">사진 업로드하기</button>
-                <div id="image-preview" class="image-preview">
-                    <img id="face-image" src="" alt="Face Preview" style="display: none; max-width: 100%; border-radius: 10px;">
+            <div class="tool-wrapper">
+                <div id="upload-area" class="upload-area">
+                    <input type="file" id="image-input" accept="image/*" hidden>
+                    <button id="upload-btn" class="main-btn">사진 업로드하여 분석하기</button>
+                    <div id="image-preview" class="image-preview">
+                        <img id="face-image" src="" alt="분석 이미지 미리보기" style="display: none;">
+                    </div>
+                </div>
+
+                <div id="loading" class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>인공지능 모델이 얼굴 특징을 분석 중입니다...</p>
+                </div>
+
+                <div id="result-area" class="result-area" style="display: none;">
+                    <h2 id="result-title">분석 결과</h2>
+                    <div id="label-container" class="label-container"></div>
+                    <button id="retry-btn" class="main-btn">다시 테스트하기</button>
                 </div>
             </div>
 
-            <div id="loading" class="loading" style="display: none;">
-                <p>모델 분석 중...</p>
-            </div>
-
-            <div id="result-area" class="result-area" style="display: none;">
-                <h2 id="result-title">분석 결과</h2>
-                <div id="label-container" class="label-container"></div>
-                <button id="retry-btn" class="main-btn" style="margin-top: 20px;">다시 하기</button>
+            <div class="description-box">
+                <h3>동물상 테스트란?</h3>
+                <p>본 서비스는 Google의 Teachable Machine 인공지능 모델을 기반으로 제작되었습니다. 수만 장의 동물상 데이터를 학습한 AI가 사용자의 사진을 분석하여 강아지상, 고양이상 등 가장 높은 일치율을 보이는 동물상을 찾아드립니다. 업로드된 사진은 어디에도 저장되지 않으니 안심하고 이용하세요.</p>
             </div>
         </section>
 
         <hr class="divider">
 
-        <section class="lotto-generator">
-            <h1>Lotto Number Generator</h1>
-            <div id="lotto-sets-container" class="lotto-sets-container"></div>
-            <button id="generate-btn" class="main-btn">Generate Numbers</button>
+        <!-- Lotto Generator Section -->
+        <section id="lotto-generator" class="content-section">
+            <div class="section-header">
+                <h1>행운의 로또 번호 생성기</h1>
+                <p class="subtitle">오늘밤 행운의 주인공은 바로 당신입니다.</p>
+            </div>
+
+            <div class="tool-wrapper">
+                <div id="lotto-sets-container" class="lotto-sets-container"></div>
+                <button id="generate-btn" class="main-btn">행운의 번호 5세트 생성</button>
+            </div>
+
+            <div class="description-box">
+                <h3>로또 번호 생성기 활용 팁</h3>
+                <p>무작위 추출 알고리즘을 통해 1부터 45까지의 번호 중 중복되지 않는 6개의 숫자를 5세트 생성합니다. 생성된 번호는 시각적으로 보기 편하게 정렬되어 제공됩니다. 인공지능 분석 결과로 기분이 좋아졌다면, 생성된 행운의 번호로 로또 한 장 어떠신가요?</p>
+            </div>
         </section>
 
         <hr class="divider">
 
-        <div class="contact-form">
-            <h2>제휴 문의</h2>
-            <form action="https://formspree.io/f/xlgwkleq" method="POST">
-                <div class="form-group">
-                    <label for="name">이름</label>
-                    <input type="text" id="name" name="name" required>
+        <!-- About Section -->
+        <section id="about" class="content-section info-section">
+            <h2>서비스 소개 및 가치</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>정확한 분석</h4>
+                    <p>최신 머신러닝 기술을 활용하여 사용자에게 가장 적합한 결과를 도출합니다.</p>
                 </div>
-                <div class="form-group">
-                    <label for="email">이메일</label>
-                    <input type="email" id="email" name="_replyto" required>
+                <div class="info-card">
+                    <h4>완전한 프라이버시</h4>
+                    <p>모든 데이터는 브라우저 내에서만 처리되며, 서버로 이미지를 전송하지 않습니다.</p>
                 </div>
-                <div class="form-group">
-                    <label for="subject">제목</label>
-                    <input type="text" id="subject" name="subject" required>
+                <div class="info-card">
+                    <h4>사용자 중심 설계</h4>
+                    <p>직관적인 UI와 빠른 응답 속도로 최적의 경험을 제공합니다.</p>
                 </div>
-                <div class="form-group">
-                    <label for="message">문의 내용</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">문의하기</button>
-            </form>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- Contact Section -->
+        <section id="contact" class="content-section">
+            <h2>제휴 및 이용 문의</h2>
+            <div class="contact-form">
+                <form action="https://formspree.io/f/xlgwkleq" method="POST">
+                    <div class="form-group">
+                        <label for="name">이름</label>
+                        <input type="text" id="name" name="name" placeholder="성함을 입력해주세요" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">이메일 주소</label>
+                        <input type="email" id="email" name="_replyto" placeholder="답변받으실 이메일을 입력해주세요" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">문의 제목</label>
+                        <input type="text" id="subject" name="subject" placeholder="문의 주제를 입력해주세요" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">문의 상세 내용</label>
+                        <textarea id="message" name="message" rows="5" placeholder="궁금하신 내용을 상세히 적어주세요" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">문의하기</button>
+                </form>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- Comments Section -->
+        <section class="content-section">
+            <h2>사용자 후기 및 의견</h2>
+            <div id="disqus_thread" class="disqus-container"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#privacy">개인정보처리방침</a>
+                <a href="#terms">이용약관</a>
+                <a href="#about">사이트 소개</a>
+            </div>
+            <p class="copyright">&copy; 2024 Animal & Lotto. All rights reserved.</p>
+            <p class="disclaimer">본 사이트의 로또 번호 생성 결과는 단순 참고용이며, 실제 당첨을 보장하지 않습니다.</p>
         </div>
+    </footer>
 
-        <hr class="divider">
-
-        <div id="disqus_thread" class="disqus-container"></div>
-        <script>
-            /**
-            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-            /*
-            var disqus_config = function () {
-            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-            };
-            */
-            (function() { // DON'T EDIT BELOW THIS LINE
-            var d = document, s = d.createElement('script');
-            s.src = 'https://productbuilder-lcmkbytxzs.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <!-- Policy Modals (Optional) or separate sections -->
+    <div id="privacy-section" class="policy-text" style="display:none;">
+        <h3>개인정보처리방침</h3>
+        <p>본 서비스는 사용자의 이미지를 서버에 저장하거나 외부로 전송하지 않습니다. 모든 분석 과정은 사용자의 웹 브라우저 내에서 클라이언트 사이드 기술로 수행됩니다.</p>
     </div>
+
     <script src="main.js"></script>
+    <script>
+        (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://productbuilder-lcmkbytxzs.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
 </body>
 </html>

@@ -9,11 +9,7 @@ updateThemeButtonText(currentTheme);
 
 themeToggle.addEventListener('click', () => {
     let theme = document.documentElement.getAttribute('data-theme');
-    if (theme === 'dark') {
-        theme = 'light';
-    } else {
-        theme = 'dark';
-    }
+    theme = theme === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
     updateThemeButtonText(theme);
@@ -23,6 +19,17 @@ function updateThemeButtonText(theme) {
     themeToggle.textContent = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
 }
 
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+// Lotto Generation Logic
 function generateNumberSet() {
     const numbers = new Set();
     while (numbers.size < 6) {
@@ -52,9 +59,9 @@ function renderNumberSets() {
 generateBtn.addEventListener('click', renderNumberSets);
 renderNumberSets();
 
-// --- Animal Face Test Logic ---
+// Animal Face Test Logic
 const URL = "https://teachablemachine.withgoogle.com/models/-DW_XAraC/";
-let model, labelContainer, maxPredictions;
+let model, maxPredictions;
 
 const uploadBtn = document.getElementById('upload-btn');
 const imageInput = document.getElementById('image-input');
@@ -85,7 +92,6 @@ imageInput.addEventListener('change', async (e) => {
             loading.style.display = 'block';
             
             if (!model) await initModel();
-            
             predict();
         };
         reader.readAsDataURL(file);
@@ -98,35 +104,23 @@ async function predict() {
     resultArea.style.display = 'block';
     
     labelContainerElem.innerHTML = '';
-    
-    // Sort predictions by probability
     prediction.sort((a, b) => b.probability - a.probability);
     
     const topResult = prediction[0];
-    const resultTitle = document.getElementById('result-title');
-    resultTitle.textContent = `당신은 ${topResult.className}상입니다!`;
+    document.getElementById('result-title').textContent = `당신은 ${topResult.className}상입니다!`;
 
     prediction.forEach(p => {
-        const barContainer = document.createElement('div');
-        barContainer.classList.add('prediction-bar-container');
-        
-        const label = document.createElement('div');
-        label.classList.add('prediction-label');
-        label.textContent = p.className;
-        
+        const prob = (p.probability * 100).toFixed(0);
         const barWrapper = document.createElement('div');
         barWrapper.classList.add('bar-wrapper');
         
         const bar = document.createElement('div');
         bar.classList.add('bar');
-        const prob = (p.probability * 100).toFixed(0);
         bar.style.width = prob + '%';
-        bar.textContent = prob + '%';
+        bar.textContent = `${p.className}: ${prob}%`;
         
         barWrapper.appendChild(bar);
-        barContainer.appendChild(label);
-        barContainer.appendChild(barWrapper);
-        labelContainerElem.appendChild(barContainer);
+        labelContainerElem.appendChild(barWrapper);
     });
 }
 
